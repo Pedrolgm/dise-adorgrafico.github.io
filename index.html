@@ -1,0 +1,658 @@
+<!-- AUTOR: PEDRO LUIS GARCIA MARTINEZ -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" sizes="64px" href="images/Logo.avif" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+  <!-- Enlace a css/styles.css -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- FontAwesome para íconos (opcional) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- FontAwesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+  <!-- Font APIS de Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> <!-- Fuente Roboto -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet"> <!-- Fuente Open Sans -->
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet"> <!-- Fuente Lato -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"> <!-- Fuente Montserrat -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> <!-- Fuente Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"> <!-- Fuente Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet"> <!-- Fuente Playfair Display -->
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet"> <!-- Fuente Merriweather -->
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet"> <!-- Fuente Raleway -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet"> <!-- Fuente Nunito -->
+
+  <!--Scripts VUE.JS-->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden; /* evita doble scroll */
+    }
+
+    .sticky-top-navbar {
+     position: sticky;
+     top: 0;
+     z-index: 1030; /* para que quede sobre otros elementos*/ 
+     }
+
+    .sidebar-img {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 25%; /* puedes ajustar este valor */
+      overflow: hidden;
+      z-index: 1;
+    }
+    .sidebar-img img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+    .main-content {
+      margin-left: 25%; /* mismo ancho que el sidebar */
+      height: 100vh;
+      overflow-y: auto;
+      padding: 20px;
+      background-color: #f8f9fa;
+    }
+  </style>
+</head>
+<body>
+<div id="app" class="container-fluid p-0">
+    <!-- Imagen fija izquierda -->
+    <div class="sidebar-img d-none d-md-block">
+      <img src="images/mae-mu.jpg" alt="Foto" 
+           class="img-fluid animate__animated animate__fadeInLeft" />
+    </div>
+
+    <!-- Contenido desplazable derecha -->
+    <div class="main-content">
+
+    
+    <div class="col-md-12 container-fluid p-0">
+  <!-- Navbar fijo -->
+  <nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm rounded px-3 py-2">
+    <!-- Logo -->
+    <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <img src="images/Logo.avif" alt="logo" width="60" height="60" class="me-2" />
+      DiseñosGráficos
+    </a>
+    <!-- Botón hamburguesa -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal"
+      aria-controls="menuPrincipal" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Menú colapsable -->
+    <div class="collapse navbar-collapse" id="menuPrincipal">
+      <ul class="navbar-nav ms-auto" id="menu">
+        <li class="nav-item" v-for="item in menu" :key="item.seccion">
+          <a href="#" class="nav-link" :class="{ active: seccionActiva === item.seccion }"
+            @click.prevent="seccionActiva = item.seccion">
+            {{ item.titulo }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Sección INICIO en dos columnas -->
+<section v-if="seccionActiva === 'inicio'" class="p-4 bg-light animate__animated animate__fadeIn">
+  <section>
+  <div class="container">
+    <div class="row">
+      <!-- COLUMNA IZQUIERDA: Imagen -->
+      <!-- Imagen lateral-->
+     <div class="col-md-4 text-center mb-4 mb-md-0 slide-down">
+      <img src="images/perfil.jpg" alt="Foto" class="img-fluid rounded-circle shadow" style="max-width: 250px;">
+      
+      <!-- Íconos de contacto/redes -->
+    <div class="d-flex justify-content-center mt-2">
+      <a href="mailto:david.castillo@example.com" class="text-dark me-3" title="Email">
+        <i class="fas fa-envelope fa-lg"></i>
+      </a>
+      <a href="tel:+524441234567" class="text-dark me-3" title="Teléfono">
+        <i class="fas fa-phone fa-lg"></i>
+      </a>
+      <a href="https://wa.me/524441234567" target="_blank" class="text-success me-3" title="WhatsApp">
+        <i class="fab fa-whatsapp fa-lg"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/davidcastillo" target="_blank" class="text-primary me-3" title="LinkedIn">
+        <i class="fab fa-linkedin fa-lg"></i>
+      </a>
+      <a href="https://www.instagram.com/davidcastillo.design" target="_blank" class="text-danger" title="Instagram">
+        <i class="fab fa-instagram fa-lg"></i>
+      </a>
+    </div>
+     </div>
+
+      <!-- COLUMNA DERECHA: Información -->
+      <div class="col-lg-7 col-md-8">
+        <h1 class="display-5 fw-bold text-primary">David Castillo</h1>
+        <h4 class="text-secondary">Diseñador Gráfico Profesional & Creativo Visual</h4>
+
+        <p> Con más de <strong>5 años de experiencia</strong> en el campo del diseño gráfico, me especializo en la creación de identidades visuales, materiales publicitarios, diseño web y contenido multimedia. Me apasiona transformar ideas en conceptos visuales efectivos que conecten con el público.
+        </p>
+
+        <ul class="list-unstyled text-muted">
+          <li><i class="fas fa-check-circle text-success me-2"></i> Branding y desarrollo de identidad corporativa</li>
+          <li><i class="fas fa-check-circle text-success me-2"></i> Diseño de materiales impresos y digitales</li>
+          <li><i class="fas fa-check-circle text-success me-2"></i> Diseño UX/UI para páginas web y apps</li>
+          <li><i class="fas fa-check-circle text-success me-2"></i> Ilustración digital y manejo avanzado de Adobe Creative Suite</li>
+          <li><i class="fas fa-check-circle text-success me-2"></i> Edición de video y animaciones simples</li>
+        </ul>
+
+        <p><strong>Mi objetivo</strong> es ayudarte a destacar visualmente en un mundo saturado de información. Creo marcas con personalidad, identidades coherentes y soluciones visuales impactantes que conectan con tu audiencia.</p>
+        <p><strong>¿A quién ayudo?</strong> A emprendedores, empresas, agencias y marcas personales que desean comunicar su mensaje con claridad, estilo y profesionalismo.</p>
+
+        <!-- Botones -->
+        <div class="mt-4">
+          <a href="#" class="btn btn-primary me-2">
+            <i class="fas fa-eye me-1"></i> Ver Portafolio
+          </a>
+          <a href="#" class="btn btn-outline-secondary me-2" target="_blank">
+            <i class="fas fa-download me-1"></i> Descargar CV
+          </a>
+          <a href="#" class="btn btn-outline-success">
+            <i class="fas fa-envelope me-1"></i> Contactar
+          </a>
+        </div>
+      </div>
+    </div>
+    </section>
+  <section class="p-5 bg-white" id="galeria">
+  <div class="container">
+    <h2 class="text-center text-primary mb-4">Galería de Diseños</h2>
+    <div class="row g-4">
+      <!-- Imagen 1 -->
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="imagen-hover position-relative">
+          <img src="images/design05.jpg" class="img-fluid rounded" alt="Diseño 1">
+          <div class="overlay"></div>
+        </div>
+        <div class="mt-2 text-center">
+          <h6 class="mb-1 fw-bold">Branding Café Aroma</h6>
+          <p class="small text-muted mb-0">Identidad visual completa con logotipo y mockups.</p>
+        </div>
+      </div>
+      <!-- Imagen 2 -->
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="imagen-hover position-relative">
+          <img src="images/design06.jpg" class="img-fluid rounded" alt="Diseño 2">
+          <div class="overlay"></div>
+        </div>
+        <div class="mt-2 text-center">
+          <h6 class="mb-1 fw-bold">Portada Álbum “Luz Interior”</h6>
+          <p class="small text-muted mb-0">Composición visual para lanzamiento musical.</p>
+        </div>
+      </div>
+      <!-- Imagen 3 -->
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="imagen-hover position-relative">
+          <img src="images/design07.jpg" class="img-fluid rounded" alt="Diseño 3">
+          <div class="overlay"></div>
+        </div>
+        <div class="mt-2 text-center">
+          <h6 class="mb-1 fw-bold">Campaña Redes Sociales</h6>
+          <p class="small text-muted mb-0">Gráficos para Instagram de tienda de ropa urbana.</p>
+        </div>
+      </div>
+      <!-- Imagen 4 -->
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="imagen-hover position-relative">
+          <img src="images/design08.jpg" class="img-fluid rounded" alt="Diseño 4">
+          <div class="overlay"></div>
+        </div>
+         <div class="mt-2 text-center">
+          <h6 class="mb-1 fw-bold">Poster de Evento Cultural</h6>
+          <p class="small text-muted mb-0">Diseño de cartel promocional para festival local.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  </div>
+</section>
+
+<!--Seccion de sobre mí-->
+<section v-if="seccionActiva === 'sobre'" class="p-4 rounded animate__animated animate__fadeIn">
+  <h2 class="mb-4 text-primary border-bottom pb-2">Sobre mí</h2>
+  <p class="lead">
+    Soy <strong>diseñador gráfico</strong> apasionado por transformar ideas en experiencias visuales memorables.
+    Con más de <strong>5 años de experiencia</strong>, me especializo en identidad visual, diseño publicitario y soluciones UI/UX.
+  </p>
+  <div class="row mt-4">
+    <!-- Habilidades -->
+    <div class="col-md-6 mb-3">
+      <div class="p-3 shadow-sm bg-white rounded hover-card">
+        <h5 class="titulo-colgante">
+           <i class="fas fa-thumbtack icono"></i> Habilidades destacadas
+        </h5>
+        <ul class="list-unstyled">
+          <li><i class="fas fa-check text-success me-2"></i>Identidad corporativa</li>
+          <li><i class="fas fa-check text-success me-2"></i>Diseño UX/UI</li>
+          <li><i class="fas fa-check text-success me-2"></i>Publicidad digital</li>
+          <li><i class="fas fa-check text-success me-2"></i>Branding estratégico</li>
+        </ul>
+      </div>
+    </div>
+    <!-- Herramientas -->
+    <div class="col-md-6 mb-3">
+      <div class="p-3 shadow-sm bg-white rounded hover-card">
+        <h5 class="titulo-colgante">
+           <i class="fas fa-thumbtack icono"></i> Herramientas
+        </h5>
+        <ul class="list-unstyled">
+          <li><i class="fab fa-adobe text-danger me-2"></i>Photoshop, Illustrator, InDesign</li>
+          <li><i class="fas fa-drafting-compass text-primary me-2"></i>Figma, Adobe XD, Canva</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- Filosofía de trabajo -->
+  <div class="mt-4 p-3 bg-light rounded shadow-sm">
+    <h5 class="titulo-colgante">
+           <i class="fas fa-thumbtack icono"></i> Forma de Trabajar
+        </h5>
+    <p>
+      Creo que el diseño no solo debe ser bonito, sino también funcional. Me enfoco en comprender al cliente y su audiencia para crear piezas que comuniquen con claridad y emoción.
+    </p>
+  </div>
+  <!-- Testimonios como carrusel -->
+<div id="carouselTestimonios" class="carousel slide mt-5 mb-5" data-bs-ride="carousel">
+  <div class="carousel-inner bg-light p-4 shadow rounded">
+    <div class="carousel-item active">
+      <blockquote class="blockquote text-muted fst-italic text-center">
+        <p>“David logró captar exactamente lo que necesitábamos. Su creatividad y profesionalismo nos ayudaron a elevar nuestra marca.”</p>
+        <footer class="blockquote-footer mt-2">Mariana Gómez, <cite>CEO de Agencia Creativa</cite></footer>
+      </blockquote>
+    </div>
+    <div class="carousel-item">
+      <blockquote class="blockquote text-muted fst-italic text-center">
+        <p>“Excelente trabajo visual. David siempre entrega a tiempo y con una calidad impecable.”</p>
+        <footer class="blockquote-footer mt-2">Luis García, <cite>Editor de Revista MX</cite></footer>
+      </blockquote>
+    </div>
+    <div class="carousel-item">
+      <blockquote class="blockquote text-muted fst-italic text-center">
+        <p>“Gracias a su diseño nuestra web ganó mucha más atención. Muy recomendado.”</p>
+        <footer class="blockquote-footer mt-2">Carla Ruiz, <cite>Emprendedora</cite></footer>
+      </blockquote>
+    </div>
+  </div>
+
+  <!-- Controles -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselTestimonios" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
+    <span class="visually-hidden">Anterior</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselTestimonios" data-bs-slide="next">
+    <span class="carousel-control-next-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
+    <span class="visually-hidden">Siguiente</span>
+  </button>
+</div>
+
+  <!-- Estadísticas -->
+  <div class="row text-center mt-4">
+    <div class="col-4">
+      <h3 class="text-primary">+5</h3>
+      <p>Años de experiencia</p>
+    </div>
+    <div class="col-4">
+      <h3 class="text-success">+120</h3>
+      <p>Proyectos realizados</p>
+    </div>
+    <div class="col-4">
+      <h3 class="text-warning">98%</h3>
+      <p>Clientes satisfechos</p>
+    </div>
+  </div>
+
+  <!-- Botón de Portafolio -->
+<div class="mt-4 text-center">
+  <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalPortafolio">
+    <i class="fas fa-folder-open me-2"></i> Ver Portafolio
+  </button>
+</div>
+</section>
+
+<!-- Modal Portafolio con Carrusel -->
+<div class="modal fade" id="modalPortafolio" tabindex="-1" aria-labelledby="modalPortafolioLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalPortafolioLabel">Mi Portafolio</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+
+        <!-- Carrusel -->
+        <div id="carruselPortafolio" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+              <img src="images/design01.jpg" class="d-block w-100 rounded" alt="Proyecto 1">
+              <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+                <h5>Landing Page</h5>
+                <p>Diseño responsivo en Bootstrap 5.</p>
+              </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+              <img src="images/design02.jpg" class="d-block w-100 rounded" alt="Proyecto 2">
+              <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+                <h5>Panel de Administración</h5>
+                <p>Interfaz con tarjetas y gráficos.</p>
+              </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+              <img src="images/design03.jpg" class="d-block w-100 rounded" alt="Proyecto 3">
+              <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+                <h5>Formulario de Soporte</h5>
+                <p>Generación de PDF y almacenamiento en base de datos.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Flechas -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#carruselPortafolio" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carruselPortafolio" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+          </button>
+
+          <!-- Indicadores -->
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carruselPortafolio" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Proyecto 1"></button>
+            <button type="button" data-bs-target="#carruselPortafolio" data-bs-slide-to="1" aria-label="Proyecto 2"></button>
+            <button type="button" data-bs-target="#carruselPortafolio" data-bs-slide-to="2" aria-label="Proyecto 3"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Sección Proyectos -->
+    <section v-if="seccionActiva === 'proyectos'" class="p-4 rounded animate__animated animate__fadeIn">
+      <h2 class="mb-4 text-primary border-bottom pb-2">Mis Proyectos</h2>
+       <div class="row g-4">
+    <!-- Proyecto 1: Branding -->
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm border-0 hover-shadow">
+        <img src="images/IdentidadVisual-cafe.jpg" class="card-img-top" alt="Branding Corporativo">
+        <div class="card-body">
+          <h5 class="card-title">Identidad Visual - Café Aroma</h5>
+          <p class="card-text">Diseño de logotipo, paleta de colores, tipografía y papelería para marca de cafetería artesanal.</p>
+        </div>
+        <div class="card-footer bg-white border-0 text-end">
+          <a href="#" target="_blank" class="btn btn-outline-primary btn-sm">
+            Ver proyecto <i class="fas fa-external-link-alt ms-1"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Proyecto 2: Portadas -->
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm border-0">
+        <img src="images/portadamusical.jpg" class="card-img-top" alt="Portada de Álbum">
+        <div class="card-body">
+          <h5 class="card-title">Diseño de Portada - Álbum Musical</h5>
+          <p class="card-text">Ilustración y composición gráfica para la portada del álbum “Luz Interior” del artista Leo M.</p>
+        </div>
+        <div class="card-footer bg-white border-0 text-end">
+          <a href="#" target="_blank" class="btn btn-outline-primary btn-sm">
+            Ver proyecto <i class="fas fa-external-link-alt ms-1"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Proyecto 3: Redes sociales -->
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm border-0">
+        <img src="images/paqueredsocial.jpg" class="card-img-top" alt="Redes Sociales">
+        <div class="card-body">
+          <h5 class="card-title">Pack de Gráficos para Instagram</h5>
+          <p class="card-text">Diseños atractivos y coherentes para publicaciones de una tienda de ropa urbana.</p>
+        </div>
+        <div class="card-footer bg-white border-0 text-end">
+          <a href="#" target="_blank" class="btn btn-outline-primary btn-sm">
+            Ver proyecto <i class="fas fa-external-link-alt ms-1"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>  
+  </section>
+
+<section v-if="seccionActiva === 'contacto'" class="p-4 rounded animate__animated animate__fadeIn">
+  <div class="container">
+    <div class="row">
+
+      <!-- Lado Izquierdo: Formulario -->
+      <div class="col-md-6 mb-4">
+        <h3 class="mb-3"><i class="fas fa-paper-plane text-primary"></i> Contáctame</h3>
+        <form>
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre completo</label>
+            <input type="text" class="form-control" id="nombre" required>
+          </div>
+          <div class="mb-3">
+            <label for="correo" class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" id="correo" required>
+          </div>
+          <div class="mb-3">
+            <label for="mensaje" class="form-label">Mensaje</label>
+            <textarea class="form-control" id="mensaje" rows="3" required></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Servicios requeridos:</label><br>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="branding">
+              <label class="form-check-label" for="branding">Branding</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="editorial">
+              <label class="form-check-label" for="editorial">Diseño editorial</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="web">
+              <label class="form-check-label" for="web">Diseño web</label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+        </form>
+      </div>
+
+      <!-- Lado Derecho: Tarjeta con datos -->
+      <div class="col-md-6 mb-4">
+        <div class="card shadow-lg bg-dark bg-gradient text-dark h-100" style="border-radius: 8%;">
+          <div class="card-body">
+            <h4 class="card-title text-primary py-3"><i class="fas fa-user text-primary colgar me-2"></i>David Castillo</h4>
+            <p class="text-white"><i class="fas fa-graduation-cap text-success"></i> Licenciatura en Diseño Gráfico</p>
+            <p class="text-white"><i class="fas fa-palette text-primary"></i> Especialidad: Branding, editorial y web</p>
+            <p class="text-white"><i class="fas fa-map-marker-alt text-danger"></i> San Luis Potosí, México</p>
+            <p class="text-white"><i class="fas fa-envelope text-warning"></i> david.castillo@email.com</p>
+            <p class="text-white"><i class="fas fa-phone"></i> 444-123-4567</p>
+            <p class="mb-1 text-white">©2025 Pedro Luis García Martínez</p>
+                <a href="#" class="icono-red"><i class="fab fa-facebook fa-lg"></i></a>
+                <a href="#" class="icono-red"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" class="icono-red"><i class="fab fa-behance fa-lg"></i></a>
+                <a href="#" class="icono-red"><i class="fab fa-dribbble fa-lg"></i></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Mapa de ubicación -->
+    <div class="row mt-4">
+      <div class="col-12">
+        <h4><i class="fas fa-map-marked-alt text-success"></i> Ubicación</h4>
+        <div class="ratio ratio-16x9">
+          <iframe 
+            src="https://www.google.com/maps?q=San+Luis+Potos%C3%AD,+Mexico&output=embed" 
+            allowfullscreen 
+            loading="lazy" 
+            style="border:0;">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-dark text-white mt-5 pt-4 pb-3">
+  <div class="container">
+    <div class="row text-center text-md-start"> 
+      <!-- Columna 1 -->
+      <div class="col-md-4 mb-3">
+        <h5 class="text-uppercase">Secciones</h5>
+        <ul class="list-unstyled">
+          <li><a href="#inicio" class="text-white text-decoration-none">Inicio</a></li>
+          <li><a href="#portafolio" class="text-white text-decoration-none">Portafolio</a></li>
+          <li><a href="#contacto" class="text-white text-decoration-none">Contacto</a></li>
+        </ul>
+      </div>
+      <!-- Columna 2 -->
+      <div class="col-md-4 mb-3">
+        <h5 class="text-uppercase">Información</h5>
+        <ul class="list-unstyled">
+          <li><a href="#sobre-mi" class="text-white text-decoration-none">Sobre mí</a></li>
+          <li><a href="#servicios" class="text-white text-decoration-none">Servicios</a></li>
+          <li><a href="#clientes" class="text-white text-decoration-none">Clientes</a></li>
+        </ul>
+      </div>
+      <!-- Columna 3 -->
+      <div class="col-md-4 mb-3">
+        <h5 class="text-uppercase">Sígueme</h5>
+        <a href="https://facebook.com" target="_blank" class="text-white me-3">
+          <i class="fab fa-facebook fa-lg"></i>
+        </a>
+        <a href="https://twitter.com" target="_blank" class="text-white me-3">
+          <i class="fab fa-twitter fa-lg"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" class="text-white me-3">
+          <i class="fab fa-instagram fa-lg"></i>
+        </a>
+        <a href="https://linkedin.com" target="_blank" class="text-white">
+          <i class="fab fa-linkedin fa-lg"></i>
+        </a>
+      </div>
+
+    </div>
+    <hr class="border-light" />
+    <div class="text-center small">
+      &copy; 2025 DiseñosGráficos | Pedro Luis García Martínez. Todos los derechos reservados.
+    </div>
+  </div>
+</footer>
+
+
+
+</div> <!--no tocar-->
+<!----------------------------- Scripts Vue y Bootstrap ---------------------------------------------------------->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    new Vue({
+  el: '#app',
+  data: {
+    seccionActiva: 'inicio',
+    mensajeEnviado: false,
+    form: {
+      nombre: '',
+      correo: '',
+      mensaje: ''
+    },
+    menu: [
+      { seccion: 'inicio', titulo: 'Inicio' },
+      { seccion: 'sobre', titulo: 'Sobre mí' },
+      { seccion: 'proyectos', titulo: 'Proyectos' },
+      { seccion: 'contacto', titulo: 'Contacto' }
+    ]
+  },
+  mounted() {
+    document.querySelectorAll('.gallery-img').forEach(img => {
+      img.addEventListener('click', () => {
+        const src = img.getAttribute('src');
+        document.getElementById('imagenAmpliada').src = src;
+        const modalImg = new bootstrap.Modal(document.getElementById('modalImagen'));
+        modalImg.show();
+      });
+    });
+  },
+  methods: {
+    enviarFormulario() {
+      this.mensajeEnviado = true;
+      setTimeout(() => {
+        this.mensajeEnviado = false;
+        this.form.nombre = '';
+        this.form.correo = '';
+        this.form.mensaje = '';
+      }, 3000);
+    }
+  }
+});
+  </script>
+
+  <script>
+  function abrirImagen(src) {
+    document.getElementById('imagenAmpliada').src = src;
+    var modal = new bootstrap.Modal(document.getElementById('modalImagen'));
+    modal.show();
+  }
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const btnUp = document.querySelector(".btn-up");
+
+    btnUp.addEventListener("click", function (e) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  });
+</script> 
+</div>
+<!------------------------------------------------------------------------------------------------------------------>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,272 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+
+/* Estilo general del cuerpo de la página */
+body {
+  background-color: #fff; /* Color de fondo suave tipo beige/dorado */
+  scroll-behavior: smooth;     /* Desplazamiento suave al hacer clic en anclas */
+  padding-bottom: 80px;        /* Espacio inferior para no tapar contenido con el footer fijo */
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', serif;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+/* Estilo del contenedor lateral de imagen */
+.sidebar-img {
+  height: 100%;              /* Altura completa */
+  padding: 20px;             /* Espacio interno */
+  background: #ffffff;        /* Fondo blanco */
+  position: sticky;          /* Se queda fijo al hacer scroll */
+  top: 20px;                 /* Separación desde la parte superior */
+  height: fit-content;       /* Ajusta la altura según el contenido */
+}
+
+/* Estilo de la imagen dentro del sidebar */
+.sidebar-img img {
+  max-width: 100%;           /* Que no rebase el ancho del contenedor */
+  border-radius: 12px;       /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra suave */
+}
+
+/* Estilo de los enlaces de navegación en el menú */
+#menu .nav-link {
+  color: #333;               /* Color oscuro para texto */
+  font-weight: 500;          /* Peso medio de la fuente */
+  transition: all 0.3s ease; /* Transición suave en hover */
+}
+
+/* Estilo al pasar el mouse sobre el enlace del menú */
+#menu .nav-link:hover {
+  background-color: rgba(0, 0, 0, 0.05); /* Fondo gris claro */
+  border-radius: 8px;                    /* Bordes redondeados */
+}
+
+/* Estilo del enlace activo del menú */
+#menu .nav-link.active {
+  background-color: #0d6efd; /* Azul Bootstrap */
+  color: white;              /* Texto blanco */
+  border-radius: 8px;
+}
+
+/* Estilo base de todas las secciones */
+section {
+  padding: 40px 20px;                          /* Espaciado interno */
+  background: white;                           /* Fondo blanco */
+  border-radius: 12px;                         /* Bordes redondeados */
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);         /* Sombra suave */
+  margin-bottom: 30px;                         /* Espacio entre secciones */
+}
+
+/* Estilo de tarjetas con efecto al pasar el mouse */
+.hover-card {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.hover-card:hover {
+  transform: translateY(-5px);                     /* Eleva la tarjeta */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);        /* Sombra más intensa */
+  background-color: #fdfdfd;                       /* Fondo ligeramente más claro */
+}
+
+/* Estilos responsivos para pantallas pequeñas */
+@media (max-width: 768px) {
+  .sidebar-img {
+    text-align: center; /* Centra el contenido */
+    padding: 10px; /* Reduce el padding */
+  }
+  .sidebar-img img {
+    max-width: 80%; /* Reduce tamaño de imagen */
+  }
+}
+
+/* Estilo de títulos con ícono colgante */
+.titulo-colgante {
+  position: relative;
+  display: inline-block;
+  padding-left: 30px;          /* Espacio para el ícono a la izquierda */
+}
+
+/* Ícono que cuelga y se anima */
+.titulo-colgante .icono {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #0d6efd;              /* Azul Bootstrap */
+  font-size: 20px;
+  animation: colgar 1s infinite ease-in-out; /* Animación infinita */
+}
+
+/* Animación de "colgar" (oscila el ícono) */
+@keyframes colgar {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(10deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Estilo para el pie de página fijo */
+.footer-fijo {
+  position: fixed;             /* Se mantiene visible al final */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #1a1a2e;   /* Color oscuro elegante */
+  z-index: 1000;               /* Se mantiene por encima de otros elementos */
+}
+
+/* Texto dentro del footer */
+.footer-fijo p {
+  color: #ffffff;
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Íconos de redes sociales en el footer */
+.icono-red {
+  color: #ffffff;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+/* Cambio de color al pasar el mouse sobre el ícono */
+.icono-red:hover {
+  color: #00f2fe;              /* Cian brillante al hacer hover */
+}
+
+/* Contenedor para imágenes con efecto overlay */
+.imagen-hover {
+  overflow: hidden;
+  border-radius: 0.5rem;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Imagen dentro del contenedor con animación */
+.imagen-hover img {
+  transition: transform 0.3s ease;
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+/* Cuadro negro semitransparente encima de la imagen */
+.imagen-hover .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Negro con opacidad */
+  border-radius: 0.5rem;
+  opacity: 0;                            /* Oculto inicialmente */
+  transition: opacity 0.3s ease;
+}
+
+/* Aumenta el tamaño de la imagen al pasar el mouse */
+.imagen-hover:hover img {
+  transform: scale(1.05);
+}
+
+/* Muestra el overlay al pasar el mouse */
+.imagen-hover:hover .overlay {
+  opacity: 1;
+}
+
+/* Animación suave desde menos altura */
+@keyframes slideFromTop {
+  from {
+    transform: translateY(100px); /* Baja desde solo 30px */
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Clase que activa la animación anterior */
+.slide-down {
+  animation: slideFromTop 1s ease-out;
+}
+
+/* Alternativa más corta para animación de bajada */
+@keyframes slideDown {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Clase que aplica la animación */
+.slide-down {
+  animation: slideFromTop 0.8s ease-out;
+}
+
+/* Imagen de tarjeta tipo proyecto (ej. galería) */
+.card-img-top {
+  cursor: pointer;               /* Cursor en forma de mano */
+  transition: transform 0.3s;    /* Animación al pasar el mouse */
+}
+
+/* Aumenta ligeramente al pasar el mouse */
+.card-img-top:hover {
+  transform: scale(1.05);
+}
+
+.circle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  background-color: #007bff;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.circle:hover {
+  background-color: #0056b3;
+}
+
+.circle {
+    display: none; /* Oculto inicialmente */
+  }
+
+.btn-whatsapp {
+  bottom: 20px;
+  left: 20px;
+}
+.btn-up {
+  bottom: 20px;
+  right: 20px;
+  background-color: #007bff;
+}
+.btn-up:hover {
+  background-color: #0056b3;
+}
+
+
+
+
