@@ -1,5 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
 
 /* Estilo general del cuerpo de la página */
 body {
@@ -10,16 +9,20 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat', serif;
+  font-family: 'Montserrat';
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
 p {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat';
   font-weight: 300;
   line-height: 1.6;
   text-align: justify;
+}
+
+strong {
+  font-weight: bold !important;
 }
 
 /* Estilo del contenedor lateral de imagen */
@@ -59,6 +62,12 @@ p {
   border-radius: 8px;
 }
 
+
+.nav-link.active { /*indica en que sección se encuentra el usuario*/
+      font-weight: bold; /*grosor de letra*/
+      color: #ffffff !important; /*Se cambia el color deseado*/
+    }
+
 /* Estilo base de todas las secciones */
 section {
   padding: 40px 20px;                          /* Espaciado interno */
@@ -89,6 +98,7 @@ section {
   }
 }
 
+/*ANIMACIONES*/
 /* Estilo de títulos con ícono colgante */
 .titulo-colgante {
   position: relative;
@@ -113,6 +123,54 @@ section {
   100% { transform: rotate(0deg); }
 }
 
+/*Animaciones de texto*/
+/* Desplazamiento desde arriba */
+.barrido {
+  opacity: 0;
+  transform: translateY(-30px);
+  animation: barridoDesdeArriba 1s ease forwards;
+}
+
+@keyframes barridoDesdeArriba {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Desplazamiento desde la derecha */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-right {
+  animation: slideInRight 1s ease-out;
+}
+
+/* Zoom desd el centro */
+.zoom-entrada {
+  animation: zoomIn 0.8s ease-out both;
+}
+
+@keyframes zoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/*PIE DE PAGINA
 /* Estilo para el pie de página fijo */
 .footer-fijo {
   position: fixed;             /* Se mantiene visible al final */
